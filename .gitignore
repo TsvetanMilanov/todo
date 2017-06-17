@@ -18,3 +18,7 @@ vendor
 
 # Build artifacts
 .build/*
+
+# Executables
+main.exe
+todo.exe
