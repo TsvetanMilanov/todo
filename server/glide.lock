@@ -1,0 +1,6 @@
+hash: 4e4b86dc8de1100dc6a9f8d2a798e9d78e93c902b9d0bab48f78444616da7771
+updated: 2017-06-17T12:32:52.0084561+03:00
+imports:
+- name: github.com/facebookgo/inject
+  version: cc1aa653e50f6a9893bcaef89e673e5b24e1e97b
+testImports: []
