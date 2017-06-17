@@ -15,3 +15,6 @@
 
 # Dependencies directories
 vendor
+
+# Build artifacts
+.build/*
