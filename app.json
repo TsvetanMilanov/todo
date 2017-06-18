@@ -1,0 +1,12 @@
+{
+	"name": "todo",
+	"description": "Simple TODO app.",
+	"keywords": [
+		"todo",
+		"go"
+	],
+	"image": "heroku/go:1.8",
+	"mount_dir": "src/github.com/TsvetanMilanov/todo",
+	"website": "http://github.com/TsvetanMilanov/todo",
+	"repository": "http://github.com/TsvetanMilanov/todo"
+}

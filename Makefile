@@ -41,3 +41,6 @@ build-server: $(BUILDDIR)/build-server
 
 clean/%:
 	rm -rf $(BUILDDIR)/*$**
+
+heroku: $(BUILDDIR)/build-server
+	heroku container:push web
