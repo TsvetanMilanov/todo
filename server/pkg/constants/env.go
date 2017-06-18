@@ -4,6 +4,6 @@ const (
 	// ServerPortEnvVar is the name of the port environment variable.
 	ServerPortEnvVar = "PORT"
 
-	// AdminPassEnvVar is the name of the environment variable which contains the admin user password.
-	AdminPassEnvVar = "ADMIN_PASS"
+	// DbServerEnvVar is the name of the database server address environment variable.
+	DbServerEnvVar = "DB_SERVER"
 )

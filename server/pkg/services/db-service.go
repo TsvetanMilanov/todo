@@ -33,6 +33,11 @@ func (db *DbService) InitializeDatabase() error {
 	return err
 }
 
+// GetCollection returns a collection from the database.
+func (db *DbService) GetCollection(collection string) *mgo.Collection {
+	return db.database.C(collection)
+}
+
 // Dispose closes/releases all the db resources.
 func (db *DbService) Dispose() error {
 	db.database.Logout()

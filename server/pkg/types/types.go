@@ -1,5 +1,12 @@
 package types
 
+import (
+	"net/http"
+
+	"github.com/TsvetanMilanov/todo/server/pkg/db/models"
+	mgo "gopkg.in/mgo.v2"
+)
+
 // IHelpers helper methods.
 type IHelpers interface {
 	GetEnvVariableOrDefault(env, defaultValue string) string
@@ -9,11 +16,27 @@ type IHelpers interface {
 // IDbService database related methods.
 type IDbService interface {
 	InitializeDatabase() error
+	GetCollection(collection string) *mgo.Collection
 	Dispose() error
+}
+
+// IRouter api routes related methods
+type IRouter interface {
+	CreateRouter() http.Handler
 }
 
 // IServerConfig server config methods.
 type IServerConfig interface {
 	Configure() error
 	Dispose() error
+}
+
+// IModelValidator db models validation methods.
+type IModelValidator interface {
+	ValidateUser(username, password string) error
+}
+
+// IUsersService describes methods for user related operations.
+type IUsersService interface {
+	AddUser(username, password string) (*models.User, error)
 }
