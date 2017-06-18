@@ -1,1 +1,1 @@
-web: ls -al bin && server/main
+web: server/main
