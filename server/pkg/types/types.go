@@ -11,6 +11,7 @@ import (
 type IHelpers interface {
 	GetEnvVariableOrDefault(env, defaultValue string) string
 	EncryptString(value string) (string, error)
+	ComparePasswordAndHash(password, hashedPassword string) error
 }
 
 // IDbService database related methods.
@@ -34,9 +35,22 @@ type IServerConfig interface {
 // IModelValidator db models validation methods.
 type IModelValidator interface {
 	ValidateUser(username, password string) error
+	ValidateLoginData(username, password string) error
 }
 
 // IUsersService describes methods for user related operations.
 type IUsersService interface {
 	AddUser(username, password string) (*models.User, error)
+	GetUser(username string) (*models.User, error)
+}
+
+// IAuthService auth related methods
+type IAuthService interface {
+	Login(username, tokenType string) (*models.Token, error)
+	AuthenticateUserWithPassword(username, password string) (*models.User, error)
+}
+
+// ITokensService token related methods.
+type ITokensService interface {
+	CreateToken(username, tokenType string) (*models.Token, error)
 }

@@ -6,4 +6,7 @@ const (
 
 	// UsersCollectionName is the name of the collection which contains the users.
 	UsersCollectionName = "Users"
+
+	// TokensCollectionName is the name of the collection which contains tokens.
+	TokensCollectionName = "Tokens"
 )

@@ -11,6 +11,7 @@ import (
 // Router api routes related methods.
 type Router struct {
 	UsersHandler types.IUsersHandler `inject:"usersHandler"`
+	AuthHandler  types.IAuthHandler  `inject:"authHandler"`
 }
 
 // CreateRouter creates the api router.
@@ -20,6 +21,7 @@ func (router *Router) CreateRouter() http.Handler {
 	api := e.Group("/api")
 
 	router.createUsersGroup(api)
+	router.createAuthGroup(api)
 
 	api.GET("", func(c echo.Context) error {
 		c.JSON(http.StatusOK, "Works")
@@ -35,4 +37,12 @@ func (router *Router) createUsersGroup(apiGroup *echo.Group) *echo.Group {
 	usersGroup.POST("", router.UsersHandler.AddUser)
 
 	return usersGroup
+}
+
+func (router *Router) createAuthGroup(apiGroup *echo.Group) *echo.Group {
+	authGroup := apiGroup.Group("/auth")
+
+	authGroup.POST("/login", router.AuthHandler.Login)
+
+	return authGroup
 }

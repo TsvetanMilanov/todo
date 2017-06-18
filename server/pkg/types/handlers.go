@@ -6,3 +6,8 @@ import "github.com/labstack/echo"
 type IUsersHandler interface {
 	AddUser(context echo.Context) error
 }
+
+// IAuthHandler auth related methods.
+type IAuthHandler interface {
+	Login(context echo.Context) error
+}

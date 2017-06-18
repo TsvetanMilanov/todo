@@ -45,3 +45,16 @@ func (validator *ModelValidator) ValidateUser(username, password string) error {
 
 	return nil
 }
+
+// ValidateLoginData validates login data.
+func (validator *ModelValidator) ValidateLoginData(username, password string) error {
+	if len(username) < usernameMinLength || len(username) > usernameMaxLength {
+		return fmt.Errorf("username should be between %d and %d symbols", usernameMinLength, usernameMaxLength)
+	}
+
+	if len(password) < passwordMinLength || len(password) > passwordMaxLength {
+		return fmt.Errorf("password should be between %d and %d symbols", passwordMinLength, passwordMaxLength)
+	}
+
+	return nil
+}

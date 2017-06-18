@@ -5,6 +5,7 @@ import (
 	"github.com/TsvetanMilanov/todo/server/pkg/db/models"
 	"github.com/TsvetanMilanov/todo/server/pkg/types"
 	"github.com/google/uuid"
+	"gopkg.in/mgo.v2/bson"
 )
 
 // UsersService users related operations.
@@ -42,6 +43,18 @@ func (service *UsersService) AddUser(username, password string) (*models.User, e
 	users := service.DbService.GetCollection(constants.UsersCollectionName)
 
 	err = users.Insert(user)
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
+
+func (service *UsersService) GetUser(username string) (*models.User, error) {
+	users := service.DbService.GetCollection(constants.UsersCollectionName)
+	user := models.User{}
+	err := users.Find(bson.M{"username": username}).One(&user)
+
 	if err != nil {
 		return nil, err
 	}

@@ -15,4 +15,13 @@ const (
 
 	// UserRole the name of the user role.
 	UserRole = "user"
+
+	// TokenExpirationTime in secnds.
+	TokenExpirationTime = 60 * 60 * 24 * 7
+
+	// BearerTokenType the Bearer token type.
+	BearerTokenType = "Bearer"
+
+	// DefaultJwtSecret the default value of the jwt encryption.
+	DefaultJwtSecret = "somesecret"
 )

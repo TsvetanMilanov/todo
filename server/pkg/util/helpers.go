@@ -31,3 +31,8 @@ func (helpers *Helpers) EncryptString(value string) (string, error) {
 
 	return string(result), nil
 }
+
+// ComparePasswordAndHash compares the provided password with the hashed password.
+func (helpers *Helpers) ComparePasswordAndHash(password, hashedPassword string) error {
+	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
+}

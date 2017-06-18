@@ -25,6 +25,9 @@ func CreateInjectorGraph() (*inject.Graph, error) {
 	var modelValidator types.IModelValidator = &validators.ModelValidator{}
 	var router types.IRouter = &services.Router{}
 	var usersHandler types.IUsersHandler = &handlers.UsersHandler{}
+	var authHandler types.IAuthHandler = &handlers.AuthHandler{}
+	var authService types.IAuthService = &services.AuthService{}
+	var tokensService types.ITokensService = &services.TokensService{}
 
 	server := &services.Server{}
 
@@ -37,6 +40,9 @@ func CreateInjectorGraph() (*inject.Graph, error) {
 		&inject.Object{Value: modelValidator, Name: "modelValidator"},
 		&inject.Object{Value: router, Name: "router"},
 		&inject.Object{Value: usersHandler, Name: "usersHandler"},
+		&inject.Object{Value: authHandler, Name: "authHandler"},
+		&inject.Object{Value: authService, Name: "authService"},
+		&inject.Object{Value: tokensService, Name: "tokensService"},
 	)
 
 	if err != nil {
