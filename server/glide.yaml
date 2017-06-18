@@ -8,3 +8,11 @@ import:
   version: 3.1.0
   subpackages:
   - middleware
+- package: gopkg.in/mgo.v2
+  subpackages:
+  - bson
+- package: golang.org/x/crypto
+  subpackages:
+  - bcrypt
+- package: github.com/google/uuid
+  version: "0.2"

@@ -42,5 +42,14 @@ func main() {
 		os.Exit(1)
 	}
 
+	err = server.ServerConfig.Configure()
+
+	if err != nil {
+		glog.Fatal(err)
+		os.Exit(1)
+	}
+
+	defer server.ServerConfig.Dispose()
+
 	server.Run()
 }

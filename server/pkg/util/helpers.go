@@ -2,6 +2,8 @@ package util
 
 import (
 	"os"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 // Helpers helper methods
@@ -17,4 +19,15 @@ func (helpers *Helpers) GetEnvVariableOrDefault(env, defaultValue string) string
 	}
 
 	return result
+}
+
+// EncryptString encrypts the provided string.
+func (helpers *Helpers) EncryptString(value string) (string, error) {
+	result, err := bcrypt.GenerateFromPassword([]byte(value), bcrypt.DefaultCost)
+
+	if err != nil {
+		return "", err
+	}
+
+	return string(result), nil
 }

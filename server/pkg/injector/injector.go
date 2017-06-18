@@ -17,10 +17,16 @@ func CreateInjectorGraph() (*inject.Graph, error) {
 	)
 
 	var helpers types.IHelpers = &util.Helpers{}
+	var dbService types.IDbService = &services.DbService{}
+	var serverConfig types.IServerConfig = &services.ServerConfig{}
+
 	server := &services.Server{}
+
 	err = injector.Provide(
 		&inject.Object{Value: helpers, Name: "helpers"},
 		&inject.Object{Value: server, Name: "server"},
+		&inject.Object{Value: dbService, Name: "dbService"},
+		&inject.Object{Value: serverConfig, Name: "serverConfig"},
 	)
 
 	if err != nil {

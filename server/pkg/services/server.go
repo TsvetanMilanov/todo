@@ -14,7 +14,8 @@ import (
 
 // Server the API server.
 type Server struct {
-	Helpers types.IHelpers `inject:"helpers"`
+	Helpers      types.IHelpers      `inject:"helpers"`
+	ServerConfig types.IServerConfig `inject:"serverConfig"`
 }
 
 // Run starts the server.
