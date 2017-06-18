@@ -1,5 +1,7 @@
 SHELL := bash
 
+OS ?= $(shell uname)
+
 rwildcard = $(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 executablename = $(shell [[ $(OS) = 'Windows_NT' ]] && echo $1.exe || echo $1)
 
@@ -41,6 +43,3 @@ build-server: $(BUILDDIR)/build-server
 
 clean/%:
 	rm -rf $(BUILDDIR)/*$**
-
-heroku: $(BUILDDIR)/build-server
-	heroku container:push web
