@@ -9,8 +9,12 @@ import (
 	"github.com/spf13/pflag"
 )
 
+// Helpers helper methods.
+type Helpers struct {
+}
+
 // CheckFlags ...
-func CheckFlags(cmd *cobra.Command, args []string) {
+func (helpers *Helpers) CheckFlags(cmd *cobra.Command, args []string) {
 	var requiredFlags []string
 	var missingFlags []string
 	cmd.Flags().VisitAll(func(f *pflag.Flag) {
@@ -41,7 +45,7 @@ func CheckFlags(cmd *cobra.Command, args []string) {
 }
 
 // MarkFlagRequired ...
-func MarkFlagRequired(cmd *cobra.Command, flag string) {
+func (helpers *Helpers) MarkFlagRequired(cmd *cobra.Command, flag string) {
 	var lookupFlag *pflag.Flag
 	lookupFlag = cmd.Flags().Lookup(flag)
 	if lookupFlag != nil {

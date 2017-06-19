@@ -5,7 +5,6 @@ import (
 	"io"
 	"os"
 
-	"github.com/TsvetanMilanov/todo/clients/cli/pkg/util"
 	"github.com/golang/glog"
 	"github.com/spf13/cobra"
 )
@@ -16,14 +15,14 @@ var completionCmd = &cobra.Command{
 	Use:     "completion",
 	Example: `  source <(todo completion --shell zsh)`,
 	Short:   "Generates shell completion",
-	PreRun:  util.CheckFlags,
+	PreRun:  helpers.CheckFlags,
 	Run:     runCompletionCmd,
 }
 
 func init() {
 	rootCmd.AddCommand(completionCmd)
 	completionCmd.Flags().StringVar(&shell, "shell", os.Getenv("SHELL"), "zsh/bash")
-	util.MarkFlagRequired(completionCmd, "shell")
+	helpers.MarkFlagRequired(completionCmd, "shell")
 }
 
 func runCompletionCmd(cmd *cobra.Command, args []string) {
