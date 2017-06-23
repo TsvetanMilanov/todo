@@ -1,8 +1,9 @@
 package cmd
 
 import (
-	"fmt"
-
+	"github.com/TsvetanMilanov/todo/clients/cli/pkg/injector"
+	"github.com/TsvetanMilanov/todo/clients/cli/pkg/types"
+	"github.com/golang/glog"
 	"github.com/spf13/cobra"
 )
 
@@ -12,7 +13,7 @@ var (
 		Use:    "login",
 		Short:  "Used to receive access token.",
 		Long:   "You will be granted an access token which will be use for operations which require authentication.",
-		PreRun: helpers.CheckFlags,
+		PreRun: preRun,
 		Run:    run,
 	}
 	username string
@@ -27,8 +28,18 @@ func init() {
 	flagsSet.StringVar(&password, "password", "", "Password")
 
 	helpers.MarkFlagRequired(loginCmd, "username")
+	helpers.MarkFlagRequired(loginCmd, "password")
 }
 
 func run(cmd *cobra.Command, args []string) {
-	fmt.Println("login called")
+	authServiceObj, _ := injector.Resolve(*graph, "authService")
+	authService := authServiceObj.(types.IAuthService)
+
+	result, err := authService.Login(username, password)
+	if err != nil {
+		glog.Exit(err)
+	}
+
+	//TODO: Log user data.
+	glog.Info(result)
 }

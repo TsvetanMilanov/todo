@@ -15,7 +15,7 @@ var completionCmd = &cobra.Command{
 	Use:     "completion",
 	Example: `  source <(todo completion --shell zsh)`,
 	Short:   "Generates shell completion",
-	PreRun:  helpers.CheckFlags,
+	PreRun:  preRun,
 	Run:     runCompletionCmd,
 }
 
@@ -23,6 +23,10 @@ func init() {
 	rootCmd.AddCommand(completionCmd)
 	completionCmd.Flags().StringVar(&shell, "shell", os.Getenv("SHELL"), "zsh/bash")
 	helpers.MarkFlagRequired(completionCmd, "shell")
+}
+
+func preRun(cmd *cobra.Command, args []string) {
+	helpers.CheckFlags(cmd, args)
 }
 
 func runCompletionCmd(cmd *cobra.Command, args []string) {

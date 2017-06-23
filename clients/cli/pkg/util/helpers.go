@@ -4,6 +4,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/TsvetanMilanov/todo/clients/cli/pkg/constants"
 	"github.com/golang/glog"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
@@ -59,4 +60,15 @@ func (helpers *Helpers) MarkFlagRequired(cmd *cobra.Command, flag string) {
 	if err != nil {
 		glog.Fatal(err)
 	}
+}
+
+// GetEnv returns the current environment.
+func (helpers *Helpers) GetEnv() string {
+	env := os.Getenv(constants.EnvVariableName)
+
+	if len(env) == 0 {
+		env = constants.LocalEnv
+	}
+
+	return env
 }
