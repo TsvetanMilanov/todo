@@ -67,7 +67,7 @@ func (helpers *Helpers) GetEnv() string {
 	env := os.Getenv(constants.EnvVariableName)
 
 	if len(env) == 0 {
-		env = constants.LocalEnv
+		env = constants.ProductionEnv
 	}
 
 	return env
