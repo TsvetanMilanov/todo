@@ -50,6 +50,7 @@ func (service *UsersService) AddUser(username, password string) (*models.User, e
 	return &user, nil
 }
 
+// GetUser returns the data for the user wuth the provided username.
 func (service *UsersService) GetUser(username string) (*models.User, error) {
 	users := service.DbService.GetCollection(constants.UsersCollectionName)
 	user := models.User{}

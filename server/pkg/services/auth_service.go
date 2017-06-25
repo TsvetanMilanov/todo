@@ -6,9 +6,10 @@ import (
 	"github.com/TsvetanMilanov/todo/server/pkg/constants"
 	"github.com/TsvetanMilanov/todo/server/pkg/db/models"
 	"github.com/TsvetanMilanov/todo/server/pkg/types"
+	"github.com/golang/glog"
 )
 
-// AuthService auth related methods
+// AuthService auth related methods.
 type AuthService struct {
 	DbService     types.IDbService     `inject:"dbService"`
 	UsersService  types.IUsersService  `inject:"usersService"`
@@ -43,5 +44,31 @@ func (auth *AuthService) AuthenticateUserWithPassword(username, password string)
 		return nil, errors.New("invalid username or password")
 	}
 
+	user.Password = ""
+	return user, nil
+}
+
+// AuthenticateUserWithToken checks if the provided token is valid and returns the owner of the token.
+func (auth *AuthService) AuthenticateUserWithToken(token string) (*models.User, error) {
+	tokenInfo, err := auth.TokensService.ParseToken(token)
+	if err != nil {
+		return nil, err
+	}
+
+	if auth.TokensService.IsTokenExpired(token) {
+		err = auth.TokensService.RemovExpiredTokens(tokenInfo.Username)
+		if err != nil {
+			glog.Info(err.Error())
+		}
+
+		return nil, errors.New("token expired")
+	}
+
+	user, err := auth.UsersService.GetUser(tokenInfo.Username)
+	if err != nil {
+		return nil, err
+	}
+
+	user.Password = ""
 	return user, nil
 }

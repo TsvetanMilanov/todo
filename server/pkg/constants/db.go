@@ -9,4 +9,7 @@ const (
 
 	// TokensCollectionName is the name of the collection which contains tokens.
 	TokensCollectionName = "Tokens"
+
+	// TodosCollectionName is the name of the collection which contains TODOs.
+	TodosCollectionName = "Todos"
 )

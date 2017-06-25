@@ -5,7 +5,6 @@ import (
 	"github.com/TsvetanMilanov/todo/server/pkg/db/models"
 	"github.com/TsvetanMilanov/todo/server/pkg/types"
 
-	"github.com/google/uuid"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -57,13 +56,6 @@ func (db *DbService) seedInitialData() error {
 	}
 
 	if count == 0 {
-		id, err := uuid.NewUUID()
-
-		if err != nil {
-			return err
-		}
-
-		admin.ID = id.String()
 		admin.Username = constants.AdminUsername
 		admin.Roles = []string{constants.AdminRole, constants.ModeratorRole, constants.UserRole}
 		admin.Todos = []string{}

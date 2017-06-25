@@ -24,4 +24,13 @@ const (
 
 	// DefaultJwtSecret the default value of the jwt encryption.
 	DefaultJwtSecret = "somesecret"
+
+	// UserContextVariable is the name of the context variable which contains the user info.
+	UserContextVariable = "User"
+
+	// AuthorizationHeaderName is the name of Authorization header.
+	AuthorizationHeaderName = "Authorization"
+
+	// BearerAuthenticationScheme is the name of Bearer authentication scheme.
+	BearerAuthenticationScheme = "Bearer"
 )
