@@ -18,4 +18,10 @@ const (
 
 	// ApplicationJSONContentType application/json content type.
 	ApplicationJSONContentType = "application/json"
+
+	// TodoDataFolder is the folder which contains the todo related additional files.
+	TodoDataFolder = ".todo"
+
+	// UserDataFile is the name of the file which contains the current user data.
+	UserDataFile = ".todo-user-data"
 )

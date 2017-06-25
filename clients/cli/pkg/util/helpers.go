@@ -4,6 +4,8 @@ import (
 	"os"
 	"strings"
 
+	"os/user"
+
 	"github.com/TsvetanMilanov/todo/clients/cli/pkg/constants"
 	"github.com/golang/glog"
 	"github.com/spf13/cobra"
@@ -71,4 +73,33 @@ func (helpers *Helpers) GetEnv() string {
 	}
 
 	return env
+}
+
+// GetCurrentUserHomeDir returns the HOME directory of the current user.
+func (helpers *Helpers) GetCurrentUserHomeDir() (string, error) {
+	user, err := user.Current()
+	if err != nil {
+		return "", err
+	}
+
+	return user.HomeDir, nil
+}
+
+// Exists checks if the file/dir exists.
+func (helpers *Helpers) Exists(pathToCheck string) bool {
+	_, err := os.Stat(pathToCheck)
+	if err != nil && os.IsNotExist(err) {
+		return false
+	}
+
+	return true
+}
+
+// EnsureDirExists creates dirs recursively if they does not exist.
+func (helpers *Helpers) EnsureDirExists(dir string, fileMode os.FileMode) error {
+	if !helpers.Exists(dir) {
+		return os.MkdirAll(dir, fileMode)
+	}
+
+	return nil
 }

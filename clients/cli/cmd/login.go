@@ -3,7 +3,6 @@ package cmd
 import (
 	"github.com/TsvetanMilanov/todo/clients/cli/pkg/injector"
 	"github.com/TsvetanMilanov/todo/clients/cli/pkg/types"
-	"github.com/golang/glog"
 	"github.com/spf13/cobra"
 )
 
@@ -37,9 +36,9 @@ func run(cmd *cobra.Command, args []string) {
 
 	result, err := authService.Login(username, password)
 	if err != nil {
-		glog.Exit(err)
+		logger.Exit(err)
 	}
 
-	//TODO: Log user data.
-	glog.Info(result)
+	logger.Info("User successfully logged in.")
+	logger.Info(result.User)
 }

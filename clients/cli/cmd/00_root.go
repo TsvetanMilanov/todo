@@ -25,6 +25,7 @@ var (
 	}
 	graph   *inject.Graph
 	helpers types.IHelpers
+	logger  types.ILogger
 	err     error
 )
 
@@ -60,4 +61,11 @@ func init() {
 	}
 
 	helpers = helpersObject.(types.IHelpers)
+
+	loggerObj, err := injector.Resolve(*graph, "logger")
+	if err != nil {
+		glog.Exit(err)
+	}
+
+	logger = loggerObj.(types.ILogger)
 }

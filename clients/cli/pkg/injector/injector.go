@@ -20,6 +20,8 @@ func CreateInjectorGraph() (*inject.Graph, error) {
 
 	var helpers types.IHelpers = &util.Helpers{}
 	var authService types.IAuthService = &services.AuthService{}
+	var userService types.IUserService = &services.UserService{}
+	var logger types.ILogger = &services.Logger{}
 	var serverConfigManager types.IServerConfigManager = &config.ServerConfigManager{}
 	var authAPIService types.IAuthAPIService = &api.AuthAPIService{}
 	var serverClient types.IServerClient = &api.ServerClient{}
@@ -30,6 +32,8 @@ func CreateInjectorGraph() (*inject.Graph, error) {
 		&inject.Object{Value: serverConfigManager, Name: "serverConfigManager"},
 		&inject.Object{Value: authAPIService, Name: "authAPIService"},
 		&inject.Object{Value: serverClient, Name: "serverClient"},
+		&inject.Object{Value: userService, Name: "userService"},
+		&inject.Object{Value: logger, Name: "logger"},
 	)
 
 	if err != nil {
